@@ -1,18 +1,56 @@
 {
-    "name": "express-HelloWorld",
-    "description": "Hello World Node Express web application",
-    "version": "0.0.1",
+    "name": "iFriendsPet",
+    "version": "1.1.2",
     "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "dbSync": "node ./bin/dbSync",
+        "tableSync": "node ./bin/tableSync",
+        "test": "cd node_modules/.bin; mocha $(find ./routes -name '*.spec.js') --recursive -w",
+        "test-suggest": "node_modules/.bin/mocha api/suggest/suggest.spec.js",
+        "test-profile": "node_modules/.bin/mocha api/profile/profile.spec.js",
+        "ci-test": "./node_modules/.bin/istanbul cover tape \"test/*-test.js\" > test.tap",
+        "ci-testresult": "./node_modules/.bin/istanbul report clover",
+        "ci-lint": "./node_modules/.bin/eslint -f checkstyle index.js > checkstyle-result.xml"
+    },
     "dependencies": {
-        "express": "4.16.2"
+        "apn": "^2.1.5",
+        "aws-sdk": "^2.60.0",
+        "body-parser": "^1.15.2",
+        "config": "^1.26.1",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.3",
+        "cors": "^2.8.4",
+        "debug": "^2.2.0",
+        "ejs": "^2.5.6",
+        "express": "^4.13.4",
+        "https": "^1.0.0",
+        "jade": "^1.11.0",
+        "jsonwebtoken": "^7.4.1",
+        "logger": "0.0.1",
+        "mkdirp": "^0.5.1",
+        "morgan": "^1.7.0",
+        "multer": "^1.3.0",
+        "mysql": "^2.13.0",
+        "node-gcm": "^0.14.6",
+        "nodemailer": "^2.7.2",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "q": "^1.5.0",
+        "secure-conf": "0.0.4",
+        "sequelize": "^3.30.4",
+        "serve-favicon": "^2.3.2",
+        "winston": "^2.3.1",
+        "winston-daily-rotate-file": "^1.4.6"
     },
     "devDependencies": {
-        "mocha": "5.0.0",
-        "unit.js": "2.0.0",
-        "supertest": "3.0.0"
-    },
-    "scripts": {
-        "start": "node server.js",
-        "test": "mocha --recursive tests --exit"
+        "babel-cli": "^6.16.0",
+        "babel-preset-es2015": "^6.16.0",
+        "eslint": "^3.12.2",
+        "istanbul": "^0.4.5",
+        "mocha": "^3.2.0",
+        "should": "^11.1.2",
+        "supertest": "^2.0.1",
+        "tape": "^4.6.3"
     }
 }

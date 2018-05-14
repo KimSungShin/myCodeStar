@@ -1,0 +1,10 @@
+{
+  "routes":
+  [
+    { "name": "appInformation",       "path": "/appInformation",   "fn": { "path": "../../api/appInformation" },   "use": true }
+  ],
+  "administrator":
+  [
+    { "name": "administrator",   "path": "/administrator",      "fn": { "path": "../../api/administrator" },    "use": true }
+  ]
+}

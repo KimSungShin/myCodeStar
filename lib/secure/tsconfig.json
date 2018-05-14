@@ -1,0 +1,12 @@
+{
+  "production" : {
+    "db"    : {
+      "database" : "mysql",
+      "user"     : "root",
+      "password" : "!EDFT#$@%^TSSDFRT"
+    },
+    "app"   : {
+      "port"     : 5555
+    }
+  }
+}

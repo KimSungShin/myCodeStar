@@ -1,0 +1,250 @@
+{
+
+  "name" : "default",
+
+  "host" : "http://localhost:3000",
+  "cors":{
+    "allow-origin":[
+
+      "http://localhost:8100",
+
+      "https://devmall.ifriendspet.com"
+
+    ]
+  },
+
+  /* -------------------------------------------------------------------- */
+  /* DataBase Configuration                                               */
+  /* -------------------------------------------------------------------- */
+  "Sequelize": {
+
+    "comments": "DataBase Configuration",
+    "sync": {"force": false},
+    "mysql": {
+
+      "id": null,
+      "password": null,
+
+      "db": "daifp",
+      "connection_info": {
+        "host": "localhost",
+        "dialect" : "mysql",
+        "dialectOptions": {
+          "charset": "utf8mb4"
+        },
+        "replication": {
+          "read": [
+            { "host": "ibks-ifp-dev-rds.cjzzkleaejrp.ap-northeast-2.rds.amazonaws.com", "username": "admin", "password": "ibks0901!" }
+          ],
+          "write": { "host": "ibks-ifp-dev-rds.cjzzkleaejrp.ap-northeast-2.rds.amazonaws.com", "username": "admin", "password": "ibks0901!" }
+        },
+        "pool":{
+          "max": 30,
+          "min": 0
+        },
+        "timezone": "+09:00"
+      },
+      "TRANSACTION": {
+        "autocommit" : 0
+      }
+    }
+  },
+
+  /* -------------------------------------------------------------------- */
+  /* Token Configuration                                                  */
+  /* -------------------------------------------------------------------- */
+  "Token": {
+    "auth": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "HS256",
+        "expiresIn": 1440000
+      }
+    },
+    "mail": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "HS256",
+        "expiresIn": 1440
+      }
+    },
+    "passwordMail": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "HS256",
+        "expiresIn": 1440
+      }
+    },
+    "registerEmail": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "HS256",
+        "expiresIn": 1440
+      }
+    },
+    "share": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "HS256"
+      }
+    },
+    "password": {
+      "key": "abcDEF",
+      "options": {
+        "algorithm": "sha256",
+        "digest": "hex"
+      }
+    }
+  },
+
+  /* -------------------------------------------------------------------- */
+  /* Token Configuration                                                  */
+  /* -------------------------------------------------------------------- */
+  "SNSLogin": {
+    "facebook": {
+      "options" : {
+        "host": "graph.facebook.com",
+        "port": "443",
+        "path": "/v2.8/me?fields=id,about,age_range,birthday,cover,currency,devices,email,first_name,gender,hometown,install_type,installed,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,religion,significant_other,sports,third_party_id,timezone,updated_time,verified,website,work"
+      }
+    },
+
+    "kakao":{
+
+    }
+  },
+
+  /* -------------------------------------------------------------------- */
+  /* Logger Configuration                                                 */
+  /* -------------------------------------------------------------------- */
+  "Logger": {
+    "transports":{
+      "winston-daily": {
+        "name": "info-file",
+        "filename": "log/server.log",
+        "datePattern": ".yyyy-MM-dd",
+        "colorize": "false",
+        "maxsize": 20000,
+        "level": "debug"
+      },
+      "winston-console": {
+        "name": "debug-console",
+        "colorize": "true",
+        "level": "debug"
+      }
+
+    },
+    "exceptionHandlers":{
+      "winston-daily": {
+        "name": "exception-file",
+        "filename": "log/exception.log",
+        "datePattern": ".yyyy-MM-dd",
+        "colorize": "false",
+        "maxsize": 20000,
+        "level": "error"
+      },
+      "winston-console": {
+        "name": "exception-console",
+        "colorize": "true",
+        "level": "error"
+      }
+    }
+  },
+
+  "morgan":{
+    "format" : "combined",
+    "skip" : false
+  },
+
+  /* -------------------------------------------------------------------- */
+  /* Email Configuration                                                  */
+  /* -------------------------------------------------------------------- */
+  "Email" : {
+
+    "smtp":{
+      "host": "mail.ibksystem.co.kr",
+      "port": 25,
+      "secure": false,
+      "auth": {
+        "user": "platform@ibksystem.co.kr",
+        "pass": "ibkS0901"
+      }
+    },
+    "signup" :{
+      "url": "http://localhost:3000/authenticate/email/",
+      "templete": "public/html/signupTemplete.html",
+      "from" : "플랫폼사업팀 <platform@ibksystem.co.kr>",
+      "subject": "아이프렌즈펫(iFriendsPet) 회원가입 확인 메일"
+    },
+    "password" :{
+      "url": "http://localhost:3000/authenticate/password/",
+      "templete": "public/html/passwordTemplete.html",
+      "from" : "플랫폼사업팀 <platform@ibksystem.co.kr>",
+      "subject": "아이프렌즈펫(iFriendsPet) 계정의 비밀번호를 재설정 해주세요"
+    },
+    "register" :{
+      "url": "https://dev.ifriendspet.com/authenticate/registerEmail/",
+      "templete": "public/html/registerTemplete.html",
+      "from" : "플랫폼사업팀 <platform@ibksystem.co.kr>",
+      "subject": "아이프렌즈펫(iFriendsPet) 이메일 인증"
+    }
+  },
+
+
+
+  "contents":{
+
+    "photo":{
+      "rootpath":"/appdata/contents/photos/",
+      "timeTable" :{
+        "div" : 8
+      }
+
+    },
+    "video":{
+      "rootpath": "/appdata/contents/videos/",
+      "timeTable" :{
+        "div" : 8
+      }
+
+    }
+  },
+
+
+  "aws":{
+    "region" : "ap-northeast-2",
+    "s3": {
+      "Bucket": "dev.photo.ifriendspet.com",
+      "ACL": "public-read",
+      "contents":{
+        "photo":{
+          "rootpath": "contents/photo",
+          "prefixURL":"https://s3.ap-northeast-2.amazonaws.com/dev.photo.ifriendspet.com/"
+        },
+        "video":{
+          "rootpath": "contents/video",
+          "prefixURL":"https://s3.ap-northeast-2.amazonaws.com/dev.photo.ifriendspet.com/"
+        }
+      }
+    }
+  },
+  "push": {
+    "ios": {
+      "dev": {
+        "gateway": "gateway.sandbox.push.apple.com",
+        "cert": "/Users/gimseongsin/.apns/keys/dev/cert_dev.pem",
+        "key": "/Users/gimseongsin/.apns/keys/dev/key_dev.pem"
+      },
+      "prod": {
+        "gateway": "gateway.push.apple.com",
+        "cert": "/home/ubuntu/.apns/keys/prod/cert_prod.pem",
+        "key": "/home/ubuntu/.apns/keys/prod/key_prod.pem",
+        "production": true
+      },
+      "bundleId": "kr.co.ibks.platformteam.ios.ifriendspet"
+    },
+    "android": {
+      "api_key": "AIzaSyAApCdB3ABJIYJ3SKeE3plFohS8PM9Nroc"
+    }
+  }
+}

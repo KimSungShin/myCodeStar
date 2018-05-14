@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+            integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+            crossorigin="anonymous"></script>
+
+    <meta property="og:title" content="<%= title %>"/>
+    <meta property="og:url" content="<%= url %>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="<%= description %>"/>
+    <meta property="og:image" content="<%= imageUrl %>"/>ion
+
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+
+
+		function pageInit(){
+			var data= {
+				pushReqNo:"fZBn3_D_M2s:APA91bH83VsY_420k-UlVAmKMq1DpZfES2CfB_NQ3VB1q5WbcbH2cDAZrukP_lC5APhk35UPgiobIeNoqqGTJiEzqrekrNnjcKmPfe0mUHTqNsh-wIoai_97yEFaUBcyoRoM76thsjsm"
+				,localeXd:"ko_KR"
+				,longitude:""
+				,latitude:""
+				,appId:"2CBA28F6B2E211E7AE4C1EB04E446DB5"
+				,vendorId:"1000000001"
+			}
+
+			var prdReq = {
+				vendorId : '1000000001',
+				appId:'2CBA28F6B2E211E7AE4C1EB04E446DB5',
+				productId: '1700000018'
+			}
+
+
+			var initResult = ''
+			var prdDetail = ''
+
+			function getPrdDetail() {
+				console.log('https://devmallapi.ifriendspet.com/ocps/app/product/detail?' + $.param(prdReq));
+
+				$.ajax({
+					type: "GET",
+					url: 'https://devmallapi.ifriendspet.com/ocps/app/product/detail?' + $.param(prdReq),
+					headers:{
+						"X-Auth-Token":initResult.token,
+						"X-Auth-Uid":initResult.uId
+					},
+					success:function(data){
+						if(data.return_code == '0000'){
+							console.log('prd result => '+JSON.stringify(data,null,2))
+							prdDetail = data.result.data
+							$("#og_title").attr("content", '아이프렌즈펫샵'); //    제목표시
+							$("#og_type").attr("content", 'website'); //    제목표시
+							$("#og_url").attr("content", 'https://devmall.ifriendspet.com/#/product/' + prdDetail.productId); //    제목표시
+							$("#og_description").attr("content", prdDetail.productName); //    제목표시
+							$("#og_image").attr("content", prdDetail.imageList[0].productImageUrl); //    제목표시
+						}else {
+							alert('상품정보를 불러올 수 없습니다.')
+						}
+
+					},
+					error:function(error){
+						console.log('error => ' + error)
+					}
+				})
+			}
+
+			$.ajax({
+				type: "POST",
+				url: "https://devmallapi.ifriendspet.com/ocps/app/member/init",
+				headers:{
+					"Content-Type":"application/json"
+				},
+				data: JSON.stringify(data),
+				success:function(data){
+					if(data.return_code == '0000'){
+						initResult = data.result.data
+						console.log('data => ' +JSON.stringify(initResult,null,2))
+						getPrdDetail();
+					}
+					else {
+						alert('시스템 내부적인 에러가 발생했습니다. \n 잠시후에 다시 시도해주세요.')
+					}
+
+				},
+				error:function(error){
+					console.log('error => ' + error)
+				}
+			});
+		}
+
+    </script>
+
+    <meta id="og_title" property="og:title" content="">
+    <meta id="og_type" property="og:type" content="">
+    <meta id="og_url" property="og:url" content="">
+    <meta id="og_description" property="og:description" content="">
+    <meta id="og_image" property="og:image" content="">
+-->
+
+
+    <meta charset="UTF-8">
+    <style>
+        .container {
+            max-width: 1000px;
+        }
+
+        .pdImg {
+            display: block;
+            width: 100%;
+            border: 1px solid #eae9ee;
+            margin: 15px 0 0 0;
+        }
+
+        .pdThumb {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border: 1px solid #eae9ee;
+            margin: 15px 10px 15px 0;
+            box-sizing: border-box;
+        }
+
+        .pdThumb.select {
+            border: 2px solid #000;
+        }
+
+        .strike {
+            font-size: 13px;
+            color: #a0a0a0;
+            text-decoration: line-through;
+        }
+
+        .showTitle {
+            font-family: 돋움, Dotum, verdana;
+            font-size: 1em;
+            font-weight: 700;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+        }
+
+        .pdName {
+            font-family: 돋움, Dotum, verdana;
+            font-size: 1em;
+            font-weight: 700;
+        }
+
+        .pdNameBg {
+            height: 57px;
+            border-top: 2px solid #313b4e;
+            border-bottom: 1px solid #eae9ee;
+            border-left: 1px solid #eae9ee;
+            border-right: 1px solid #eae9ee;
+            background-color: #fafafa;
+            line-height: 57px;
+        }
+
+        .titleBlock {
+            font-family: 돋움, Dotum, verdana;
+            font-size: 0.8em;
+            line-height: 15px;
+            font-weight: 700;
+            font-style: normal;
+            background-color: rgb(102, 102, 102);
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .borderTopBlack {
+            border-top: 2px solid #313b4e;
+        }
+        .tabMenu {
+            display: inline-block;
+            width:25%;
+            height: 45px;
+            line-height: 45px;
+
+            border: 1px solid #eae9ee;
+            border-top: 2px solid #313b4e;
+            background-color: #fafafa;
+            font-family: 돋움, Dotum, verdana;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-align: center;
+            box-sizing: border-box;
+            margin-left: -5px;
+            color:rgb(102, 102, 102);
+        }
+
+        .tabMenu:hover {
+            color:rgb(102, 102, 102);
+            text-decoration: none;
+        }
+
+        .tabMenu:first-child {
+            margin-left: 0;
+        }
+
+        .tabMenu.active {
+            color: #fff !important;
+            background-color: rgb(102, 102, 102);
+        }
+
+        .mt0 {
+            margin-top: 0;
+        }
+        .mb0 {
+            margin-bottom: 0;
+        }
+
+        .mt15 {
+            margin-top: 15px;
+        }
+
+        .buy-button {
+            border-radius: 0;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 12px 31px;
+            outline: none;
+            cursor:pointer;
+        }
+
+        .buy-button.outline {
+            background-color: #fff;
+            border: 1px solid #0099cb;
+            color: #0099cb;
+        }
+
+        .buy-button.normal {
+            border: 1px solid #0099cb;
+            background-color: #0099cb;
+            color:#fff;
+        }
+
+        .buy-button.wish {
+            border: 1px solid #b5b5b5;
+            background-color: #eaeaea;
+            color: #555;
+        }
+
+        .btn-number {
+            border-radius: 0;
+        }
+        .pdNumGroup {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            color: #8e9093;
+        }
+        .dc {
+            font-weight: bold;
+            color: #ff6e00;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: .3rem;
+        }
+
+        .subTitleArea {
+            padding: 10px 0 10px;
+            border-bottom: 1px solid #eae9ee;
+        }
+        .subtitle {
+            padding-top:5px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .subBtn {
+            background-color: #fff;
+            border: 1px solid #0099cb;
+            color: #0099cb;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .subBtn.gray {
+            border: 1px solid #a0a0a0;
+            color: #a0a0a0;
+        }
+
+        .toggleTitle {
+            display: block;
+            padding: 10px 0;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #eae9ee;
+            font-size: .9em;
+        }
+        .toggleTitle:hover {
+            color: #000;
+            text-decoration: none;
+
+        }
+        .toggleBody {
+            background: #fafafa;
+            padding: 10px;
+            border-bottom: 1px solid #eae9ee;
+            font-size: .9em;
+        }
+
+        .grade {
+            color: orange;
+            padding:0 30px 0 10px;
+        }
+        .toggleDate {
+            float:right;
+            color:#b5b5b5;
+        }
+
+        .qna-waiting {
+            font-size: 1em;
+            color:#b5b5b5;
+            font-weight: bold;
+            padding:0 30px 0 10px;
+        }
+        .qna-finish {
+            font-size: 1em;
+            color:#000;
+            font-weight: bold;
+            padding:0 30px 0 10px;
+        }
+
+        .mt50 {
+            margin-top: 50px;
+        }
+        .mt100 {
+            margin-top: 100px;
+        }
+        .mb100 {
+            margin-bottom: 100px;
+        }
+
+        .footer {
+            height: 100px;
+            padding:10px;
+
+            border-top: 1px solid #eae9ee;
+            background-color: #fafafa;
+            font-family: 돋움, Dotum, verdana;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-align: center;
+            box-sizing: border-box;
+            margin-left: -5px;
+            color:rgb(102, 102, 102);
+        }
+
+    </style>
+    <title>아이프렌즈펫몰</title>
+</head>
+<body onload="pageInit()">
+<div class="container">
+    <div class="showTitle">
+        아이프렌즈펫몰
+    </div>
+    <div class="row pdNameBg">
+        <div class="col">
+            <p class="pdName">나비캣 상어하우스 M 고양이집 애견하우스 상어집</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <img src="http://img.1300k.com/goods/215023/82/215023825087_3.jpg" class="pdImg" id="mainImg" />
+        </div>
+        <div class="col">
+            <div class="mt15">
+                <p class="strike">19,400원</p>
+                <h5>17,460<small>원</small></h5>
+                <h3 class="dc">10<small>%</small></h3>
+                <hr/>
+                <p class="info">배송비 : 2,200<small>원</small></p>
+                <p class="info">상품코드 : 17000000000</p>
+                <hr/>
+
+                <div class="input-group pdNumGroup">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                          <b>-</b>
+                        </button>
+                    </span>
+                    <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="100">
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                        <b>+</b>
+                    </button>
+                    </span>
+                </div>
+                <a href="#" class="card-link" >옵션을 선택해 주세요</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!--이미지썸네일-->
+            <img src="http://img.1300k.com/goods/215023/82/215023825087_3.jpg" class="pdThumb select" onclick="showImg(event, 'http://img.1300k.com/goods/215023/82/215023825087_3.jpg');"/>
+            <img src="http://img.1300k.com/goods/215023/84/215023846924_3.jpg" class="pdThumb" onclick="showImg(event, 'http://img.1300k.com/goods/215023/84/215023846924_3.jpg');"/>
+        </div>
+        <div class="col">
+            <hr class="mt0"/>
+            <button type="button" class="buy-button outline">장바구니 담기</button>
+            <button type="button" class="buy-button normal">바로 구매하기</button>
+            <button type="button" class="buy-button wish">찜하기</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" style="padding-left: 0;padding-right:0;">
+            <a href="#basicInfo" class="tabMenu active">상품상세정보</a>
+            <a href="#review" class="tabMenu">상품평</a>
+            <a href="#qna" class="tabMenu">상품문의</a>
+            <a href="#info" class="tabMenu">배송/교환/환불정보</a>
+        </div>
+    </div>
+    <div class="row" id="basicInfo">
+        <div class="col">
+            <img src="http://gi.esmplus.com/order3655/wonhouse/sharkhouse.jpg"/>
+        </div>
+    </div>
+    <div class="row mt100">
+        <div class="col" style="padding-left: 0;padding-right:0;">
+            <a href="#basicInfo" class="tabMenu">상품상세정보</a>
+            <a href="#review" class="tabMenu active">상품평</a>
+            <a href="#qna" class="tabMenu">상품문의</a>
+            <a href="#info" class="tabMenu">배송/교환/환불정보</a>
+        </div>
+    </div>
+    <div class="row" id="review">
+        <div class="col" style="padding-left: 0;">
+
+            <div class="subTitleArea">
+                <p class="subtitle">상품평</p>
+
+                <div style="float:right">
+                    <button class="subBtn gray">전체보기</button>
+                    <button class="subBtn">작성</button>
+                </div>
+            </div>
+
+            <div id="exampleAccordion" data-children=".item">
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" role="button" aria-expanded="true" aria-controls="exampleAccordion1">
+                        <span class="grade">★★★☆☆</span>
+                        <span>음음음</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="exampleAccordion1" class="collapse show toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion2" role="button" aria-expanded="false" aria-controls="exampleAccordion2">
+                        <span class="grade">★★★☆☆</span>
+                        <span>배송빠름</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="exampleAccordion2" class="collapse toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion3" role="button" aria-expanded="false" aria-controls="exampleAccordion3">
+                        <span class="grade">★★★☆☆</span>
+                        <span>음음음3</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="exampleAccordion3" class="collapse toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt100">
+        <div class="col" style="padding-left: 0;padding-right:0;">
+            <a href="#basicInfo" class="tabMenu">상품상세정보</a>
+            <a href="#review" class="tabMenu">상품평</a>
+            <a href="#qna" class="tabMenu active">상품문의</a>
+            <a href="#info" class="tabMenu">배송/교환/환불정보</a>
+        </div>
+    </div>
+    <div class="row" id="qna">
+        <div class="col" style="padding-left: 0;">
+
+            <div class="subTitleArea">
+                <p class="subtitle">상품문의</p>
+
+                <div style="float:right">
+                    <button class="subBtn gray">전체보기</button>
+                    <button class="subBtn">작성</button>
+                </div>
+            </div>
+
+            <div id="qnaAccr" data-children=".item">
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#qnaAccr" href="#qnaAccr1" role="button" aria-expanded="true" aria-controls="qnaAccr1">
+                        <span class="qna-waiting">답변대기</span>
+                        <span>사이즈 문의</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="qnaAccr1" class="collapse show toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#qnaAccr" href="#qnaAccr2" role="button" aria-expanded="false" aria-controls="qnaAccr2">
+                        <span class="qna-waiting">답변대기</span>
+                        <span>배송언제오나요</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="qnaAccr2" class="collapse toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a class="toggleTitle" data-toggle="collapse" data-parent="#qnaAccr" href="#qnaAccr3" role="button" aria-expanded="false" aria-controls="qnaAccr3">
+                        <span class="qna-finish">답변완료</span>
+                        <span>음음음3</span>
+                        <span class="toggleDate">2017년 11월 29일</span>
+                    </a>
+                    <div id="qnaAccr3" class="collapse toggleBody" role="tabpanel">
+                        <p class="mb-3">
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                            물건이 아주좋아요~<br/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt100">
+        <div class="col" style="padding-left: 0;padding-right:0;">
+            <a href="#basicInfo" class="tabMenu">상품상세정보</a>
+            <a href="#review" class="tabMenu">상품평</a>
+            <a href="#qna" class="tabMenu">상품문의</a>
+            <a href="#info" class="tabMenu active">배송/교환/환불정보</a>
+        </div>
+    </div>
+    <div class="row mb100" id="info">
+        <div class="col" style="padding:10px;padding-top:50px;padding-left: 0;text-align: center">
+            <button class="subBtn">필수표기정보 > </button>
+            <button class="subBtn">배송/교환/환불정보 ></button>
+        </div>
+    </div>
+
+    <div class="row mt100 footer">
+        <div class="col" style="padding-left: 0;padding-right:0;">
+            IBK System
+        </div>
+    </div>
+</div>
+
+<script>
+
+	//수량조절
+	$( '.btn-number' ).click( function( e ) {
+		e.preventDefault();
+
+		fieldName = $( this ).attr( 'data-field' );
+		type = $( this ).attr( 'data-type' );
+		var input = $( "input[name='" + fieldName + "']" );
+		var currentVal = parseInt( input.val() );
+		if( ! isNaN( currentVal ) ) {
+			if( type == 'minus' ) {
+
+				if( currentVal > input.attr( 'min' ) ) {
+					input.val( currentVal - 1 ).change();
+				}
+				if( parseInt( input.val() ) == input.attr( 'min' ) ) {
+					$( this ).attr( 'disabled', true );
+				}
+
+			} else if( type == 'plus' ) {
+
+				if( currentVal < input.attr( 'max' ) ) {
+					input.val( currentVal + 1 ).change();
+				}
+				if( parseInt( input.val() ) == input.attr( 'max' ) ) {
+					$( this ).attr( 'disabled', true );
+				}
+
+			}
+		} else {
+			input.val( 0 );
+		}
+	} );
+	$( '.input-number' ).focusin( function() {
+		$( this ).data( 'oldValue', $( this ).val() );
+	} );
+	$( '.input-number' ).change( function() {
+
+		minValue = parseInt( $( this ).attr( 'min' ) );
+		maxValue = parseInt( $( this ).attr( 'max' ) );
+		valueCurrent = parseInt( $( this ).val() );
+
+		name = $( this ).attr( 'name' );
+		if( valueCurrent >= minValue ) {
+			$( ".btn-number[data-type='minus'][data-field='" + name + "']" ).removeAttr( 'disabled' )
+		} else {
+			alert( 'Sorry, the minimum value was reached' );
+			$( this ).val( $( this ).data( 'oldValue' ) );
+		}
+		if( valueCurrent <= maxValue ) {
+			$( ".btn-number[data-type='plus'][data-field='" + name + "']" ).removeAttr( 'disabled' )
+		} else {
+			alert( 'Sorry, the maximum value was reached' );
+			$( this ).val( $( this ).data( 'oldValue' ) );
+		}
+
+
+	} );
+	$( ".input-number" ).keydown( function( e ) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if( $.inArray( e.keyCode, [ 46, 8, 9, 27, 13, 190 ] ) !== - 1 ||
+			// Allow: Ctrl+A
+			(e.keyCode == 65 && e.ctrlKey === true) ||
+			// Allow: home, end, left, right
+			(e.keyCode >= 35 && e.keyCode <= 39) ) {
+			// let it happen, don't do anything
+			return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if( (e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105) ) {
+			e.preventDefault();
+		}
+	} );
+
+	function showImg( event, src ) {
+
+		$('.pdThumb').removeClass('select')
+
+		var target = $( event.target );
+		target.addClass('select')
+
+		//target.style.border = '2px solid #000'
+
+		var div = document.getElementById('mainImg');
+		div.setAttribute('src', src)
+	}
+</script>
+</body>
+</html>
